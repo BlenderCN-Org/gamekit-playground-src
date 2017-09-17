@@ -1,0 +1,38 @@
+--- node order before sort ---
+11gkStateImpl:1
+11gkStateImpl:1
+11gkStateImpl:1
+14gkStateRefImpl:6
+21gkStateTransitionImpl:5
+14gkStateRefImpl:4
+14gkStateRefImpl:0
+21gkStateTransitionImpl:1
+21gkStateTransitionImpl:3
+14gkStateRefImpl:2
+13gkKeyNodeImpl:4
+13gkKeyNodeImpl:2
+15gkPrintNodeImpl:0
+15gkPrintNodeImpl:0
+15gkPrintNodeImpl:0
+18gkStateMachineImpl:2
+16gkEngineNodeImpl:0
+13gkKeyNodeImpl:6
+--- node order after sort ---
+13gkKeyNodeImpl:6 0
+13gkKeyNodeImpl:4 0
+13gkKeyNodeImpl:2 0
+11gkStateImpl:1 0
+11gkStateImpl:1 0
+11gkStateImpl:1 0
+14gkStateRefImpl:6 20
+21gkStateTransitionImpl:5 20
+14gkStateRefImpl:4 20
+21gkStateTransitionImpl:3 20
+14gkStateRefImpl:2 20
+21gkStateTransitionImpl:1 20
+14gkStateRefImpl:0 20
+15gkPrintNodeImpl:0 20
+15gkPrintNodeImpl:0 20
+15gkPrintNodeImpl:0 20
+16gkEngineNodeImpl:0 20
+18gkStateMachineImpl:2 100

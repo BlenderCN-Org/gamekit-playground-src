@@ -1,0 +1,73 @@
+message(STATUS  "OGRE THEORA! ${OGREKIT_OGGVORBIS_TARGET}")
+
+set(THEORA_PLUGIN_SRC
+	src/OgreTheoraDataStream.cpp
+	src/OgreVideoManager.cpp
+
+	theoraplayer/src/TheoraAsync.cpp
+	theoraplayer/src/TheoraAudioInterface.cpp
+	theoraplayer/src/TheoraAudioPacketQueue.cpp
+	theoraplayer/src/TheoraDataSource.cpp
+	theoraplayer/src/TheoraException.cpp
+	theoraplayer/src/TheoraFrameQueue.cpp
+	theoraplayer/src/TheoraTimer.cpp
+	theoraplayer/src/TheoraUtil.cpp
+	theoraplayer/src/TheoraVideoClip.cpp
+	theoraplayer/src/TheoraVideoFrame.cpp
+	theoraplayer/src/TheoraVideoManager.cpp
+	theoraplayer/src/TheoraWorkerThread.cpp
+	
+	theoraplayer/src/Theora/TheoraVideoClip_Theora.cpp
+	theoraplayer/src/Theora/TheoraVideoClip_Theora.h
+
+theoraplayer/src/YUV/C/yuv420_grey_c.c
+theoraplayer/src/YUV/C/yuv420_rgb_c.c
+theoraplayer/src/YUV/C/yuv420_yuv_c.c
+theoraplayer/src/YUV/yuv_util.c
+theoraplayer/src/YUV/yuv_util.h
+
+
+	
+)
+
+add_definitions(-D__THEORA)
+
+set(THEORA_PLUGIN_HDR
+	include/OgreTheoraDataStream.h
+	include/OgreVideoExport.h
+	include/OgreVideoManager.h
+
+	theoraplayer/include/TheoraAsync.h
+	theoraplayer/include/TheoraAudioInterface.h
+	theoraplayer/include/TheoraAudioPacketQueue.h
+	theoraplayer/include/TheoraDataSource.h
+	theoraplayer/include/TheoraException.h
+	theoraplayer/include/TheoraExport.h
+	theoraplayer/include/TheoraFrameQueue.h
+	theoraplayer/include/TheoraPixelTransform.h
+	theoraplayer/include/TheoraPlayer.h
+	theoraplayer/include/TheoraTimer.h
+	theoraplayer/include/TheoraUtil.h
+	theoraplayer/include/TheoraVideoClip.h
+	theoraplayer/include/TheoraVideoFrame.h
+	theoraplayer/include/TheoraVideoManager.h
+	theoraplayer/include/TheoraWorkerThread.h
+	
+	
+)
+
+include_directories(${OGRE_SOURCE_DIR}/OgreMain/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)	
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/theoraplayer/include)	
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/theoraplayer/src/Theora/)	
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/theoraplayer/src/YUV)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/theoraplayer/src/YUV/C)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/theoraplayer/src/YUV/libyuv/include)
+
+include_directories(../../../Dependencies/Source/Codecs/include)
+
+link_libraries(${OGREKIT_OGGVORBIS_TARGET})
+
+add_library(OgreTheora ${THEORA_PLUGIN_SRC} ${THEORA_PLUGIN_HDR})
+
+config_target_if_iphone_build(OgreTheora TRUE)

@@ -1,0 +1,7 @@
+some dependencies are sym-links to gamekit-pendencies directory that are git-submodules.
+
+To create directory-structure and download the dependencies use in GK-Folder:
+./_clone_deps.sh
+
+For ogre-git to be connected to the original ogre-hg-repositiory you need the hg-bridge to be installed:
+http://felipec.wordpress.com/2012/11/13/git-remote-hg-bzr-2/

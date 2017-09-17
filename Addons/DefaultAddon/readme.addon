@@ -1,0 +1,7 @@
+-include the as subdir in /Addons/CMakeLists.txt
+
+-the directory has to be named exactly as the filename 
+(e.g. DefaultAddon.h => class DefaultAddon : public gkAddon ... )
+
+-in cmake set the GAME_DIR-path which need to have a lua-folder. these lua-scripts will
+be embedded automatically

@@ -1,0 +1,5 @@
+If updating the blend-file(Blender.h) in FileTools/FileFormats/Blend you must remember to generate a 32bit version for the mobile devices.
+You can do this by using the win32-makefbt:
+From a subfolder in the Blend-Folder call this:
+Tools/executables/win32/makefbt.exe bfBlender bfBlender.cpp ../Blender.h
+and copy the two files to Blend/Generated-Folder

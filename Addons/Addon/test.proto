@@ -1,0 +1,51 @@
+package gamedb;
+
+option java_package = "org.tt.gamedb.generated";
+option java_outer_classname = "GameDB";
+
+message PUser {
+    required string username=1;
+    required string password=2;
+    required string email=3;
+}
+
+message PList {
+    required string type=1;
+    repeated bytes listdata = 2;
+}
+
+message PGame {
+    required string name=1;
+}
+
+message PScore {
+    required float score=1;
+}
+
+message PRegistrationInfo {
+    required int64 fromDate = 1;
+    optional int64 toDate = 2[default=0];
+    optional uint32 amountLogins = 3[default=95];
+    optional uint64 timePlayed = 4[default=0];
+}
+
+message PBooleanMsg {
+    required bool value=1;
+}
+
+message PIntMsg {
+    required int32 value=1;
+}
+
+message PFloatMsg {
+    required float value=1;
+}
+
+message PLongMsg {
+    required int64 value=1;
+}
+
+message PStringMsg {
+    required string value=1;
+}
+

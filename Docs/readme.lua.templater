@@ -1,0 +1,56 @@
+Templater is a templating-system for gamekit/librocket.
+
+You mark tag with the tt-attribute to make it visible to the "templater". Additionally you can add logic to the tags that
+will wrap around using tt_type=".." attribute. Use a TemplaterElement-based Type for this. 
+
+Block is a special type that can be recreated at the same or ever other place. The markup will be removed immediately and needs to be
+recreated with e.g.:
+
+templater:get("container.theblock"):create()
+or
+local otherBlock = templater:get("news")
+templater:get("container.theblock"):create{parentTo=otherBlock}
+
+<html>
+    <div tt="container">
+        <div tt="theblock" tt_type="Block">
+            hello
+        </div>
+    </div>
+    <div tt="news">
+    </div>
+</html>
+
+To use this with the templater:
+
+-- create a subclass
+UI = BaseClass(Templater)
+
+function UI:constructor(input)
+    -- load the prereqs for the side
+    self.gui:loadFont("media/fonts/roboto/_Roboto-Light.ttf")
+    
+    -- set the name of the template (optionaly set it via parameter-table e.g. UI{html='media/html/__theday.html'})
+    self.html = "media/html/__theday.html"      
+end
+
+
+
+ui = UI()
+ui:parse{disable_autocreate=true}
+ui.doc:createInstance()
+
+
+CAUTION:
+tt_type-elements need to set it's me-variable that set to the class itself:
+Page = BaseClass(TemplaterElement)
+
+function Page:constructor()
+    self.base.me = self
+end
+---------------------
+
+Variables to get:
+
+
+

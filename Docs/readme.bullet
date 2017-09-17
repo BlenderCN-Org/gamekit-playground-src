@@ -1,0 +1,3 @@
+For some reason at some point the current version of bullet stopped working. 
+The one used atm(20161208) is at commit-hash: 2bb26cbb7dbd82462b1e648ebad3d6ef07013caa (   https://github.com/erwincoumans/bullet3.git ) 
+ 

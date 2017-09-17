@@ -1,0 +1,27 @@
+To install a lua-debugger you need eclipse and it's LDT (Lua Developer Tools)
+
+0) Download and install(make/make install) luasocket: http://files.luaforge.net/releases/luasocket/luasocket/luasocket-2.0.2
+- you might have to add "-I/usr/include/lua5.1" to config-file's cflags 
+1) Create a LuaProject
+2) Add GK/Tools/Misc/LuaDebugger/debugger.lua to your project
+- this is essentally the same as the default one, but it adds some URI-Infos so the source-mapping works afterwards.
+3) Add this to your main.lua:
+-- set the path so that it can find the luasocket-modules and(!) the debugger
+package.path = '/usr/local/share/lua/5.1/?.lua;./lua/?.lua;' .. package.path
+-- IMPORTANT: to map the lua-files proper to your workspace you have to set the absolute file-uri to your project!
+DEBUG_URI = "file:///home/ttrocha/_dev/eclipse_workspaces/runtime-EclipseXtext/TestDebugging/"
+
+local initconnection = require("debugger")
+-- start debugger
+initconnection(idehost, ideport, idekey)
+
+4) Create local debug
+a) Configure DebugConfigurations>Lua Application
+- 1)If not done already, create Gamekit as lua-interpreter: AlternateInterpreter > Manager interpreters
+- 2)Add->GenericLua
+- 3)Set Interpreter-exe to GK-Build/Samples/Runtime/AppOgrekit
+- 4)Name it (e.g. GamekitLua)
+- uncheck capabilities: "Accept -e..." and "Accept file as argument" 
+b) select GamekitLua as Alternate interpreter
+optional)
+c) enable: break on first line

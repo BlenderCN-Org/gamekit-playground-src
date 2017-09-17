@@ -1,0 +1,25 @@
+android:
+
+1) compile the project via cmake
+- use toolchain in CMake/toolchain/android.toolchain.cmake
+- configure/generate
+- make
+=> this will compile all static-libs (the so-file is just thrown away!)
+
+2) compile final lib via ndk-build in Samples/AndroidDemo/Demo
+In Samples/AndroidDemo call ndk-build
+
+
+Build in-resource-paths:
+assets/media
+assets/media
+assets/media/images
+assets/media/scripts
+assets/media/textures
+assets/media/programs
+assets/media/programs/GLSLES
+assets/assets.zip
+
+CAUTION: Hack!? If using external images that are not packed into the blend-file you need to
+         create a zip of the images. This is done automatically if using AndroidDemo/Demo/_install.sh
+         Not sure why normal APK-Access don't work... 

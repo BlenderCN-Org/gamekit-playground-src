@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project org.tt.gen.bnodes">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="/home/ttrocha/_dev/eclipse_workspaces/xtext"/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/bnodes.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="org.tt.gen.generator.Main"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="/home/ttrocha/_dev/_projects/f95/f95-framework/org.tt.gen.bnodes/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.ecore.xmi_2.11.1.v20160208-0816.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.ecore_2.11.2.v20160208-0816.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.common_2.11.1.v20160208-0816.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.antlr.runtime_3.2.0.v201101311130.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/com.google.inject_3.0.0.v201605172100.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/com.google.inject.multibindings_3.0.0.v201402270930.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe.core_1.3.20.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe2.runtime_2.9.0.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe.utils_1.3.20.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.util_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/javax.inject_1.0.0.v20091030.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.equinox.common_3.7.0.v20150402-1709.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.xbase.lib_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.common.types_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.objectweb.asm_5.0.1.v201404251740.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.core.resources_3.10.1.v20150725-1910.jar"/>
+            <fileset dir="/home/ttrocha/_dev/_projects/f95/f95-framework/org.tt.core.utilsPlugin/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/_dev/_projects/f95/f95-framework/org.tt.core.utilsPlugin/libs/gson-2.2.4-javadoc.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/_dev/_projects/f95/f95-framework/org.tt.core.utilsPlugin/libs/gson-2.2.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/_dev/_projects/f95/f95-framework/org.tt.core.utilsPlugin/libs/commons-io-2.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.xbase_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtend.lib_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtend.lib.macro_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.core.runtime_3.11.1.v20150903-1804.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/javax.annotation_1.2.0.v201401042248.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.osgi_3.10.102.v20160118-1700.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.osgi.compatibility.state_1.0.100.v20150402-1551.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.core.jobs_3.7.0.v20150330-2103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.core.runtime.compatibility.registry_3.6.0.v20150318-1505/runtime_registry_compatibility.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.equinox.registry_3.6.0.v20150318-1503.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.equinox.preferences_3.5.300.v20150408-1437.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.core.contenttype_3.5.0.v20150421-2214.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.equinox.app_1.3.300.v20150423-1356.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.generator_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtext.xtext.generator_2.10.0.v201605250459.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.codegen.ecore_2.11.1.v20160208-0841.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.codegen_2.11.0.v20160208-0841.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtend_2.2.0.v201605260315.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/com.ibm.icu_54.1.1.v201501272100.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xpand_2.2.0.v201605260315.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.xtend.typesystem.emf_2.2.0.v201605260315.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe2.lib_2.9.0.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe2.launch_2.9.0.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.eclipse.emf.mwe2.language_2.9.0.v201605261103.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/home/ttrocha/.p2/pool/plugins/org.apache.log4j_1.2.15.v201012070815.jar"/>
+        </jar>
+    </target>
+</project>

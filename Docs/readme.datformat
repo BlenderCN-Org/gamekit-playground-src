@@ -1,0 +1,11 @@
+How it works:
+1) strip the file with the strip tool:
+./StripBlend abc.blend abc.dat
+2) load it. 
+
+Internal stuff:
+In order to change the blend2dat-mapping have a look at:
+fbtBlend.cpp (blend2datMapping)
+and in fbtFile.cpp (alternate...-Variables)
+
+That's it...

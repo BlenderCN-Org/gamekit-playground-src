@@ -1,0 +1,5 @@
+Special-Flags:
+
+gameobject game-properties(logic-editor):
+
+gk_no_batch : if static-batching is on this object will not be included to any batch 

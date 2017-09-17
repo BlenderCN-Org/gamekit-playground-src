@@ -1,0 +1,8 @@
+download mxe: http://mxe.cc/#download
+
+use at least: make gcc openal
+(not sure if more is needed)
+
+set env-variable MXE AND path to the installation dir (e.g. /opt/mxe)
+
+use the mingw cmake-toolchain at gamekit/CMake/toolchain/mingw-mxe-conf.cmake

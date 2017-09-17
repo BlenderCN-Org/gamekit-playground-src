@@ -1,0 +1,6 @@
+15:44:40: Shorthand property 'tween-s' was registered with invalid property 'tween-prop'.
+15:44:40: try to create window!
+15:44:41: WINDOW handle: 0x4200002
+15:44:41: ok, created window!
+15:44:41: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource /tmp/gamekit_tmp.blend in resource group General or any other group. in ResourceGroupManager::openResource at /home/ttrocha/_dev/extprojects/gamekit-pendencies/ogre-git/OgreMain/src/OgreResourceGroupManager.cpp (line 757)
+15:44:41: Can't assign material  to SubEntity of Cube because this Material does not exist. Have you forgotten to define it in a .material script?

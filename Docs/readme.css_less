@@ -1,0 +1,12 @@
+To use less there is lessc in GK/Tools/executables/linux64
+This is a special version that accepts hash-colors with alpha like: #aaaa 
+This is not css-compilant. In css you would have to use rgba(170,170,170,0.5434534535)
+
+You need google-log-library: https://code.google.com/p/google-glog/downloads/detail?name=glog-0.3.3.tar.gz
+
+The git patch is placed in GK/Tools/executables/linux64/patches and is created against 9a93bcc417ba6ffa3d5247508e57aa838f1f160e
+The repository to download lessc: https://github.com/BramvdKroef/clessc.git
+
+
+Usage:
+lessc input.less -o output.css

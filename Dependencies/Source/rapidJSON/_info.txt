@@ -1,0 +1,2 @@
+rapid-json: http://code.google.com/p/rapidjson/source/checkout
+rev131

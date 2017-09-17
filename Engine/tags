@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ASYNC_DT_RESULT	gkScene.h	/^	typedef gkAsyncResult<PDT_NAV_MESH > ASYNC_DT_RESULT;$/;"	t	class:gkScene
+UF_ALL	gkScene.h	/^		UF_ALL			= 0xFFFFFFFF$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_ANIMATIONS	gkScene.h	/^		UF_ANIMATIONS	= 1 << 3,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_DBVT	gkScene.h	/^		UF_DBVT			= 1 << 5,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_DEBUG	gkScene.h	/^		UF_DEBUG		= 1 << 6,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_LOGIC_BRICKS	gkScene.h	/^		UF_LOGIC_BRICKS	= 1 << 1,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_NODE_TREES	gkScene.h	/^		UF_NODE_TREES	= 1 << 2,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_NONE	gkScene.h	/^		UF_NONE			= 0,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_PHYSICS	gkScene.h	/^		UF_PHYSICS		= 1 << 0,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_PROCESS	gkScene.h	/^		UF_PROCESS      = 1 << 7,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UF_SOUNDS	gkScene.h	/^		UF_SOUNDS		= 1 << 4,$/;"	e	enum:gkScene::UPDATE_FLAGS
+UPDATE_FLAGS	gkScene.h	/^	enum UPDATE_FLAGS$/;"	g	class:gkScene
+_gkSceneObject_h_	gkScene.h	28;"	d
+getCameras	gkScene.h	/^	GK_INLINE gkCameraSet&	getCameras(void)		{ return m_cameras; }$/;"	f	class:gkScene
+getInstancedObjects	gkScene.h	/^	GK_INLINE gkGameObjectSet&      getInstancedObjects(void)    { return m_instanceObjects; }$/;"	f	class:gkScene
+getLayer	gkScene.h	/^	GK_INLINE UTuint32  getLayer(void)           {return m_layers;}$/;"	f	class:gkScene
+getLights	gkScene.h	/^	GK_INLINE gkLightSet&    getLights(void) {return m_lights;}$/;"	f	class:gkScene
+getLimits	gkScene.h	/^	const gkBoundingBox& getLimits() const { return m_limits; }$/;"	f	class:gkScene
+getLoadBlendFile	gkScene.h	/^	GK_INLINE gkBlendFile* getLoadBlendFile(void)			{ return m_blendFile;		}$/;"	f	class:gkScene
+getLogicBrickManager	gkScene.h	/^	gkLogicManager* getLogicBrickManager(void)			{ return m_logicBrickManager; }$/;"	f	class:gkScene
+getMainCamera	gkScene.h	/^	GK_INLINE gkCamera*		getMainCamera(void)		{ return m_startCam; }$/;"	f	class:gkScene
+getManager	gkScene.h	/^	GK_INLINE Ogre::SceneManager* getManager(void) { GK_ASSERT(m_manager); return m_manager; }$/;"	f	class:gkScene
+getObjects	gkScene.h	/^	GK_INLINE gkGameObjectHashMap&  getObjects(void)             { return m_objects; }$/;"	f	class:gkScene
+getProperties	gkScene.h	/^	GK_INLINE gkSceneProperties&        getProperties(void)    { return m_baseProps;  }$/;"	f	class:gkScene
+getSoundScene	gkScene.h	/^	GK_INLINE gkSoundSceneProperties&   getSoundScene(void)    { return m_soundScene; }$/;"	f	class:gkScene
+getStaticControllers	gkScene.h	/^	gkPhysicsControllerSet& getStaticControllers(void) {return m_staticControllers;}$/;"	f	class:gkScene
+getTweenManager	gkScene.h	/^	gkTweenManager* getTweenManager(void) { return m_tweenManager; }$/;"	f	class:gkScene
+getUpdateFlags	gkScene.h	/^	GK_INLINE UTuint32 getUpdateFlags(void)					{ return m_updateFlags;		}$/;"	f	class:gkScene
+getZOrder	gkScene.h	/^	GK_INLINE int getZOrder() { return m_zorder;}$/;"	f	class:gkScene
+gkScene	gkScene.h	/^class gkScene : public gkInstancedObject$/;"	c
+hasCameras	gkScene.h	/^	GK_INLINE bool			hasCameras(void)		{ return !m_cameras.empty(); }$/;"	f	class:gkScene
+hasDefaultCamera	gkScene.h	/^	GK_INLINE bool			hasDefaultCamera(void)	{ return m_startCam != 0; }$/;"	f	class:gkScene
+hasLights	gkScene.h	/^	GK_INLINE bool           hasLights(void) {return isInstanced() ? !m_lights.empty() : m_hasLights;}$/;"	f	class:gkScene
+m_baseProps	gkScene.h	/^	gkSceneProperties       m_baseProps;$/;"	m	class:gkScene
+m_blendFile	gkScene.h	/^	gkBlendFile*			m_blendFile;$/;"	m	class:gkScene
+m_cameras	gkScene.h	/^	gkCameraSet             m_cameras;$/;"	m	class:gkScene
+m_cloneCount	gkScene.h	/^	int                     m_cloneCount;$/;"	m	class:gkScene
+m_clones	gkScene.h	/^	gkGameObjectArray       m_clones;$/;"	m	class:gkScene
+m_constraintManager	gkScene.h	/^	gkConstraintManager*    m_constraintManager;$/;"	m	class:gkScene
+m_debugger	gkScene.h	/^	gkDebugger*             m_debugger;$/;"	m	class:gkScene
+m_endObjects	gkScene.h	/^	gkGameObjectSet         m_endObjects;$/;"	m	class:gkScene
+m_hasLights	gkScene.h	/^	bool                    m_hasLights;$/;"	m	class:gkScene
+m_instanceObjects	gkScene.h	/^	gkGameObjectSet         m_instanceObjects;$/;"	m	class:gkScene
+m_layers	gkScene.h	/^	UTuint32                m_layers;$/;"	m	class:gkScene
+m_lights	gkScene.h	/^	gkLightSet              m_lights;$/;"	m	class:gkScene
+m_limits	gkScene.h	/^	gkBoundingBox           m_limits;$/;"	m	class:gkScene
+m_logicBrickManager	gkScene.h	/^	gkLogicManager*			m_logicBrickManager;$/;"	m	class:gkScene
+m_manager	gkScene.h	/^	Ogre::SceneManager*     m_manager;$/;"	m	class:gkScene
+m_markDBVT	gkScene.h	/^	bool                    m_markDBVT;$/;"	m	class:gkScene
+m_meshManager	gkScene.h	/^	gkMeshManager*          m_meshManager;$/;"	m	class:gkScene
+m_navMeshData	gkScene.h	/^	PNAVMESHDATA            m_navMeshData;$/;"	m	class:gkScene
+m_objects	gkScene.h	/^	gkGameObjectHashMap     m_objects;$/;"	m	class:gkScene
+m_physicsWorld	gkScene.h	/^	gkDynamicsWorld*        m_physicsWorld;$/;"	m	class:gkScene
+m_processManager	gkScene.h	/^	gkProcessManager*		m_processManager;$/;"	m	class:gkScene
+m_renderToViewport	gkScene.h	/^	bool                    m_renderToViewport;$/;"	m	class:gkScene
+m_skybox	gkScene.h	/^	class gkSkyBoxGradient* m_skybox;$/;"	m	class:gkScene	typeref:class:gkScene::gkSkyBoxGradient
+m_soundScene	gkScene.h	/^	gkSoundSceneProperties  m_soundScene;$/;"	m	class:gkScene
+m_startCam	gkScene.h	/^	gkCamera*               m_startCam;$/;"	m	class:gkScene
+m_staticControllers	gkScene.h	/^	gkPhysicsControllerSet  m_staticControllers;$/;"	m	class:gkScene
+m_tickClones	gkScene.h	/^	gkGameObjectArray       m_tickClones;$/;"	m	class:gkScene
+m_tweenManager	gkScene.h	/^	gkTweenManager*			m_tweenManager;$/;"	m	class:gkScene
+m_updateAnimObjects	gkScene.h	/^	gkGameObjectSet         m_updateAnimObjects;$/;"	m	class:gkScene
+m_updateFlags	gkScene.h	/^	UTuint32				m_updateFlags;$/;"	m	class:gkScene
+m_viewport	gkScene.h	/^	gkViewport*				m_viewport;$/;"	m	class:gkScene
+m_window	gkScene.h	/^	gkWindow*				m_window;$/;"	m	class:gkScene
+m_zorder	gkScene.h	/^	int                     m_zorder;$/;"	m	class:gkScene
+setLoadBlendFile	gkScene.h	/^	GK_INLINE void setLoadBlendFile(gkBlendFile* blendFile)	{ m_blendFile = blendFile;	}$/;"	f	class:gkScene
+setNavMeshData	gkScene.h	/^	GK_INLINE void    setNavMeshData(PNAVMESHDATA navMeshData) { m_navMeshData = navMeshData; }$/;"	f	class:gkScene
+setUpdateFlags	gkScene.h	/^	GK_INLINE void setUpdateFlags(UTuint32 flags)			{ m_updateFlags = flags;	}$/;"	f	class:gkScene

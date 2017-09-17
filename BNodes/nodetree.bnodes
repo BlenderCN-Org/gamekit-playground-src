@@ -1,0 +1,1419 @@
+NodeTree Gamekit [options=generateScript]{ 
+	customFiles {
+		"nodetreeCustoms.py"
+	}
+	 
+	props { 
+		label : "GameKit-TreeNode"
+		icon : "NODETREE"
+	}           
+ 
+	Node PickRayNode[cat="physics" description="Create a PickRay"]{
+	
+		props {
+			hitProperty : string="";
+		}
+	
+		input { UPDATE:bool; 
+				X:float;
+				Y:float;
+				sceneName:string;
+		}
+        output { HIT : bool;
+        		 NOT_HIT :bool;
+        		 HIT_OBJ : string;
+        		 HIT_POINT : vector;
+        		 HIT_NORMAL : vector;
+        }
+ 
+	}
+	                     
+	Node TestNode[cat="temp" label="TestNode" description="This node is badass!"] {
+		props {
+ 			ObjectName : string="unknown" type=objects descr="Blender-Name of the Object that is manipualted";
+			Dir : number=floatvec[2]; 
+			Mode : enum{ ("fast","fast","Fast Mode"),("slow","slow","Slow Mode"),("ufast","UltraFast","Ultrafast Mode")} default=slow;
+			Fac : number=float value="10.95" precision=2; 
+			Size : number=int value="95"; 
+			test : number=floatvec[2] show=inSideBar; 
+		}             
+		input {        
+			sUpdate : bool;             
+		}        
+		output {                     
+			timer : float;     
+		}                  
+	}                        
+	 
+	Node MessageSend[cat="misc"]{
+		props {
+			TYPE : string="";
+		}
+		
+		input {
+			SEND : bool;
+			VALUE : string="";
+			EXT   : string="";
+		}
+	}
+	
+	Node MessageGet[cat="misc"]{
+		props {
+			TYPE : string;
+		}	
+		
+		output {
+			FIRED : bool;
+			NOT_FIRED : bool;
+			VALUE : string="";
+			EXT   : string="";
+		}
+	}
+	
+	
+	Node ObjectManipulator[cat="manipulation" description="manipulate object-data"]
+	{     		
+		props 
+		{
+			TYPE: enum{ 
+				("CREATE_INSTANCE","CREATE INSTANCE","CREATE INSTANCE"),
+				("DESTROY_INSTANCE","DESTROY INSTANCE","DESTROY INSTANCE")
+			};
+    
+		}    
+		            
+		input {     
+			ENABLED: bool;     
+			TARGET : object;     
+		}  
+		     
+	}
+	
+	Node CharacterNode[cat="physics" description="manipulate character"]
+	{
+		input {
+			obj : object;
+			linvel : vector;
+			updateLinvel : bool;
+			gravity:vector;
+			rotAxis:vector;
+			rotVal :float;
+			updateRot: bool;
+			jumpSpeed : float;
+			fallSpeed : float;
+			doJump : bool;
+		}
+		
+		output {
+			isOnGround : bool;
+		}
+	}
+	
+	Node Sequence[cat="sequence"]{
+		input{
+			ENABLE : bool;
+			RESET : bool ;
+		}
+		
+		output{
+			FINISHED : bool;
+			LOGIC : bool;
+			ACTIVE : bool;
+			ON_START: bool;
+			ON_END : bool;
+		} 
+	}
+
+
+	Node SeqFinished[cat="sequence"]{
+		props{
+			TYPE : enum {
+				( "ONCE","ONCE","Stays finished once set finished" ),
+				( "ALWAYS","ALWAYS","Changes mode as input changes")
+			};
+		}
+		
+		input {
+			connect : bool validNode{Sequence} [connectionRequired];
+			finished : bool;
+		} 
+	} 	
+	         
+	Node SeqTime[cat="sequence"]{
+		props {
+			WAIT : number=float  value="0.0" precision=2;
+		}
+		
+		input {
+			connect : bool validNode{Sequence} [connectionRequired];
+		}		
+	}   
+	
+	
+                                                 
+//	                   
+//	Node TheNode[cat="temp" label="Template Node" description="Sample Node for Generation-Framework"] {
+//		props {
+//			enumInt : enum{ ("key","name","description"),("key2","name2","description2"),("key3","name3","description3")} default=key;
+//			numFloat : number=float  value="10.95" precision=2;
+//			numInt : number=int value="95";
+//			numBool : number=bool value="1";
+//			numFloatVec : number=floatvec[2];
+//			numIntVec : number=intvec[2];
+//			numBoolVec : number=boolvec[5];
+//			tColor : number=floatvec[3]:color;	
+//		}              
+//		                                
+//		input {       
+//			iInt : int;
+//			iFloat : float;
+//			iBool : bool; 
+//			iVec : vector;
+//			iCol : color;
+//			iStr : string;  
+//		}    
+//		         
+//		output {
+//			oInt : int;
+//			oFloat : float;
+//			oBool : bool = "true";
+//			oVec : vector;
+//			oCol : color; 
+//			oStr : string;   
+//		}  
+//	} 
+	    
+	Node MotionNode[cat="manipulation" label="Motion Node" description="add motion to an object"] {
+		props {
+			Motion : enum { ("none","none","no motion at all"),
+							("rotation","rotation","rotation"), 
+							("translation","translation","translation"),
+							("scale","scale","scale"),
+							("force","force","force"),
+							("torque","torque","torque"),
+							("linvel","linear vel","linear velocity"),
+							("angvel","angular vel","angular velocity"),
+							("set_rot","set rotation","absolute rotation"),
+							("set_pos","set position","set position")
+						};  
+			Space: enum { ("local","local","Local Space"),
+				("parent","parent","Parent Space"),
+				("world","world","World Space")       
+			};
+			MaxVec : number = floatvec[3] value="(10,10,10)";
+			MinVec : number = floatvec[3] value="(-10,-10,-10)";
+			KeepXYZ: number = boolvec[3];
+//			OBJECT : string type=objects;									
+			//vec : number=floatvec[3];      
+		}        
+         
+		input {   
+			OBJECT : string = "";
+			UPDATE : bool;
+			X : float ;
+			Y : float;
+			Z : float;
+			DAMPING : float;
+		}
+		
+		output {
+			RESULT : float;
+		}
+	} 	          
+	     
+	Node MouseNode[cat="input" label="Mouse Node" description="Mouse checks"] {
+		input {
+			SCALE_X : float="1.0";
+			SCALE_Y : float="1.0";
+		}    
+		output {  
+			MOTION : bool;
+			REL_X : float; 
+			REL_Y : float;
+			ABS_X : float;
+			ABS_Y : float;
+			WHEEL: float;
+			WHEEL_MOTION:bool;
+		}
+	}	     
+	     
+	Node BoolNode[cat="math" label="Bool Node"]{
+		props {
+			Operation : enum{
+				("and","and","and"),
+				("or","or","or"),
+				("not","not","not A"), 
+				("if","if","is A true?")
+			};
+		} 
+		     
+		input {
+			A : bool;
+			B : bool; 
+		}
+		output{
+			RESULT : bool;
+			NOT : bool;  
+		}
+	}	   
+	   
+	Node MathNode[cat="math" label="Math Node" description="All Kind of Math-Magic" 
+					options=instancer_no_add]
+	 {
+		props { 
+			Operation : enum {  ("no_func","no_func","Do nothing"),
+								("add","add","Add two values"),
+								("sub","sub","sub two"),
+								("mul","mul","mul two"),
+								("div","div","div two"),
+								("sin","sin","sin"),
+								("cos","cos","cos"),
+								("tan","tan","tan"),
+								("asin","asin","asin"),
+								("acos","acos","acos"),
+								("atan","atan","atan"),
+								("power","power","power"),
+								("log","log","log"), 
+								("min","min","min"),
+								("max","max","max"),
+								("round","round","round"),
+								("lt","lt","lt"),
+								("gt","gt","gt"),
+								("sqrt","sqrt","sqrt"),       
+								("sqr","sqr","sqr"),
+								("inv","inv","Inverse")
+								
+			};   
+		}  
+		input {   
+			A : float;  
+			B : float;
+		} 
+		output {   
+			RESULT : float;  
+		} 
+	}	    
+	   
+	
+	Node TimerNode [cat="engine" label="Timer"] {
+		props {
+			ORDER : enum {
+				("asc","asc","asc"),
+				("desc","desc","desc")
+			};
+		}
+		
+		input {
+			initTime: float;
+			UPDATE: bool;
+			RESET:bool;
+		}
+		output {
+			CURRENT_TIME: float;
+			IS_DONE : bool;
+			IS_RUNNING : bool;     
+		}  
+	}  
+	
+	Node ObjectNode[cat="scene" label="Object Node" description="Select any Object"] {
+		props {
+			GLOBAL : number=bool descr="Use this object if global. If false group-instances first try to locate an object with this name in the group!";
+			Obj : string type=objects icon="OBJECT_DATA";
+		}
+		
+//		input { 
+//			NAME: string;      
+//		} 
+		   
+		output {
+			OBJECT: string;
+		}
+	}   
+	
+	Node ObjectData[cat="scene" label="ObjectData" description="Access object data"] {
+		
+		input {
+			OBJECT : object;
+		}
+		output {
+			WPOS : vector;
+			POS : vector;
+			WROT : vector;
+			ROT : vector;
+			WSCALE : vector;
+			SCALE : vector;
+			LINVEL : vector;
+			ANGVEL : vector; 
+		}
+		
+	}
+	
+	Node Accelerometer[cat="mobile"] {
+		props {
+		}
+		
+		input {
+			UPDATE : bool;
+		}
+		
+		output {
+			X : float;
+			Y : float;
+			Z : float;
+		}
+	}
+	
+	Node VectorDecomp[cat="math"] {
+		input {
+			vec : vector;
+		}
+		
+		output {
+			x : float;
+			y : float;
+			z : float;
+		}
+	}
+	
+		Node NodeTreeNode[
+		cat="scene" 
+		label="NodeTree Node" description="Select NodeTrees" 
+		options=instancer_no_add
+	]    
+	{
+		props {
+			nodetree : string="" type=node_groups  icon="NODETREE" ;
+		}   
+		    
+		input {
+			ENABLED : bool;
+			TARGET_OBJ : string="";
+		}     
+		
+		output {
+			nodetree: string; 
+		}         
+	} 
+	 
+	Node StateMachine[cat="states" priority=100] {
+		props {
+			GLOBAL : number=bool value="0" [updateable];
+			NAME : string = "" [updateable];
+			INITIAL_STATE : string="" show=inSideBar ;
+		}    
+		     
+		input {                
+			UPDATE : bool;       
+		}     
+		          
+		output {       
+			STATES : string=""; 
+			CURRENT_STATE : int;
+		}   
+	}  
+	 
+	Node State[cat="states"] {
+		props {  
+			NAME : string="" [updateable];
+			ID   : number=int value="0"; 
+		} 
+		 
+		input {   
+			STATE_ID : bool;
+		}     
+		      
+		output {    
+			START_TRIGGER : bool;
+			ACTIVE : bool;
+			END_TRIGGER : bool;	 
+		} 
+     
+	}    
+	
+ 
+	 
+	Node StateTransition[cat="states" label="StateTransition" description="Switch from one state to another" Color=("0.098","0.612","0.098")] {
+		props {
+			COND_TYPE : enum{
+				("lua","lua","Lua Condition: a lua function that will check the condition. Return true to execute transition!")
+			};
+			WAIT : number = int value="0";    
+		}           
+		  
+		input {
+			FROM : bool validNode{State StateRef} maxCons=1 [connectionRequired];
+			CONDITION : bool = "0" ;
+		}   
+		
+		output { 
+			TO : bool validNode{State StateRef} maxCons=1 [connectionRequired];
+		}
+		
+	}  
+
+	Node StateMachineRef[cat="states"] {
+		props {
+			STM : string="";
+		}  
+		output {   
+			STM : int;
+			CURRENT_STATE : int;
+		}   
+	} 
+	      
+	Node StateRef[cat="states"] {  
+		props {   
+			GLOBAL : number=bool value = "0" [updateable]; 
+			STM : string="" show=inSideBar;
+			STATE : string="" show=inSideBar;
+		}		  	   
+		input {
+			STATE : bool;       
+		}   
+		           
+		output {  
+			ACTIVE : bool="0";
+			STATE : bool;
+			START_TRIGGER : bool;  
+			END_TRIGGER : bool;	
+		}
+	}
+	
+	Node StateManipulator[cat="states"] {
+		props {
+			TYPE: enum{ ("setstate","set state","Set the state")};
+		}
+		 
+		input {
+			UPDATE : bool;
+		}
+		
+		output {
+			MANIP_STATE:string=""  validNode{StateRef} maxCons=1 [connectionRequired];
+		} 
+	}
+	 
+	
+
+	Node Property[cat="manipulation" description="with override you can set the propname via socket"]{
+		props {
+			MODE : enum{("init_property","init_property","init23_property"), 
+						("set_property","set_property","set_property")
+						,("remove_property","remove_property","remove_property") 
+			};
+			NAME : string="" [updateable]; 
+ 
+			TYPE : enum{ ("bool","bool","bool")  
+						,("float","float","float")   
+						,("string","string","string")
+			};
+		} 
+		        
+		input{
+			ENABLED : bool; 
+			VALUE : string="";
+			TARGET_OBJ : string="";
+			OVERRIDE_NAME : string=""; 
+		} 
+		      
+		output{  
+			VALUE : string=""; 
+		}  
+	}    
+
+	Node PropertyGet[cat="manipulation"]{
+		props{
+			MANUAL : number = bool;
+			NAME : string="" show=inSideBar;
+		}
+		input {
+			TARGET_OBJ : object;
+		}
+		output{
+			VALUE : string="";
+		}	 
+	}  
+	
+	Node NoOp[cat="misc"] {
+	}
+	 
+	Node TemplaterNode [cat="ui"] {
+		props {
+			DOCNAME : string="";
+			TEMPLATE : string = "" type=filepath;
+		}
+		 
+		output {
+			FONTS : bool;
+			SCREENS : bool;  
+		}
+	}
+	
+	Node ScreenAction [cat="ui"] {
+		props {
+			TYPE : enum {	("show_screen","show_screen","show_screen"),
+							("hide_screen","hide_screen","hide_screen"),
+							("show_document","show_document","show_document"),
+							("hide_document","hide_document","hide_document"),
+							("show","show","show"),
+							("hide","hide","hide"),
+							("hover","hover","hover"),
+							("clicked","clicked","clicked")
+			};
+			DOC : string="";
+			PARAM : string="";
+		}
+		input {
+			ENABLED : bool;
+		}
+		
+		
+		output {
+			VALUE : bool;
+		}
+	}
+	
+	Node Element [cat="ui"] {
+		props {
+			ID : string = "";
+		}
+		
+		input {
+			SCREEN : bool;
+		} 
+		
+		output {
+			
+		}
+	}
+	
+	Node AnimationDefinition idProp=NAME [cat="animation"] {
+		props {
+			NAME : string = "" descr="The Name of the animation" [updateable] ;
+			ANIM_NAME : string = "" type=actions icon="ACTION";
+			RAW_ANIM_NAME : string = "" show=inSideBar;
+			MODE : enum { ("loop","loop","Reset loop when done"),
+						  ("end","end","Play till end and stop"),
+						  ("inverse","inverse","Invert Frames")
+			};
+			FRAME_CUSTOM : number=bool value="0" show=noUI;
+			FRAME_START : number=int value="0" show=noUI;
+			FRAME_END : number=int value="2" show=noUI;
+			SPEED: number=float value="1.0" precision=2;
+			RESET_ONSTOP: number=bool value="0" descr="Reset animation on stop?";
+			RESET_ONSTART: number=bool value="0" descr="Reset animation on stop?";
+			BLEND: number=int value="0" descr="How many frames should be blended?";
+		}  
+		 
+		input {
+			TARGET : object;
+		}
+		
+		output {
+			TRIGGERS : bool validNode {AnimationTrigger};			
+		} 
+	}
+
+	Node AnimationPlayer[cat="animation"  description="Play/Stop/Pause on of the defined Animations"] {
+		props{
+			NAME : string =""  show=inSideBar;			
+			RAW_ANIM_NAME : string = "" show=inSideBar;
+		}
+
+		input {  
+			ENABLED : bool; 
+			START : bool;
+			STOP : bool; 
+			PAUSE : bool;
+			RESUME : bool;
+			RESET : bool;
+		}
+		
+		output {
+			ENABLED : bool;
+			RUNNING : bool; 
+			STOPPED : bool;
+			PAUSED : bool;
+			DONE_TRIGGER : bool;
+			LOOPEND_TRIGGER : bool; 
+		}
+	}
+	
+	Node AnimationTrigger[cat="animation" description="NOT IMPLEMENTED,YET"] {
+		props {
+			frame : number=int;
+		}
+		
+		input {
+			ANIMATION : bool validNode{AnimationDefinition}  maxCons=1 [connectionRequired];
+		}
+		output {
+			TRIGGERED : bool;
+			NOT_TRIGGERED : bool;			
+		}
+	}
+	
+	Node CollisionNode [cat="physics"] {
+		props {
+			PROPERTY : string="" descr="Game Property to be set. (Only for multi-search if COLLIDES_WITH is empty";
+		}
+		input {
+			ENABLED : bool;
+			TARGET : object;
+			COLLIDES_WITH : object ;
+		}  
+		
+		output {
+			HAS_COLLIDED : bool; 
+			NOT_HAS_COLLIDED : bool;
+			COLLIDED_OBJ : string;
+			CONTACT_POSITION : vector;
+		}
+	}
+	
+	Node FileNode [cat="filesystem"] {
+		props {
+			File: string="" type=filepath;
+		}
+		input {
+			FILE : bool;
+		}
+		output {
+			FILE : bool;
+		}
+	}
+
+	Node LuaNode[cat="lua" Color=("0.1","0.6","0.15")]{
+		props {
+			TYPE : string="";
+		}
+		 
+		input{
+ 
+		}   
+	}    
+	       
+
+	Node AdditionNode[cat="math" label="Addition" type=cpp]{
+		props {
+			TYPE : enum { ("float","float","FLOAT addition"),
+						  ("int","float","FLOAT addition"),
+						  ("bool","float","FLOAT addition")
+			};  
+			     
+			IVal : number=int; 
+			LUACLASS : string = ""; 
+		} 
+		input { 
+			A : float;
+			B : float;
+			OBJ : string;
+		}
+		output {
+			RESULT : float;
+		}
+	}
+	
+//	Node ExitNode[cat="engine" label="Exit Engine" description="Request Engine to exit!"]{
+//		input {
+//			EXIT : bool;
+//		}
+//	}
+	
+	Node PrintNode[cat="misc" label="Print Node" description="Print text to stdout!"] {
+		props {
+			MODE:enum{
+				("only_screen","only_screen","only_screen"),
+				("only_log","only_log","only_log"),
+				("log_screen","log + screen","log + screen")
+			};
+			ON_CHANGE:number=bool value="0" descr="Only print if the value changed";
+			PREFIX:string="";
+		}
+		
+		input { 
+			TEXT : string;
+			DOPRINT : bool;
+		}
+	}    
+	              
+	Node KeyNode[cat="input" label="Key Node" description="Check mouse button!"] {
+		props {
+			Key:enum {
+				("none","none","none"),
+				("a","a","a"),				
+				("b","b","b"),				
+				("c","c","c"),				
+				("d","d","d"),				
+				("e","e","e"),				
+				("f","f","f"),
+				("g","g","g"),				
+				("h","h","h"),				
+				("i","i","i"),				
+				("j","j","j"),				
+				("k","k","k"),				
+				("l","l","l"),				
+				("m","m","m"),				
+				("n","n","n"),				
+				("o","o","o"),				
+				("p","p","p"),				
+				("q","q","q"),				
+				("r","r","r"),				
+				("s","s","s"),				
+				("t","t","t"),				
+				("u","u","u"),				
+				("v","v","v"),				
+				("w","w","w"),				
+				("x","x","x"),				
+				("y","y","y"),				
+				("z","z","z"),				
+				("0","0","0"),				
+				("1","1","1"),				
+				("2","2","2"),				
+				("3","3","3"),				 
+				("4","4","4"),				
+				("5","5","5"),				
+				("6","6","6"),				
+				("7","7","7"),				
+				("8","8","8"),				   
+				("9","9","9"),
+				("CAPSLOCK","CAPSLOCK","CAPSLOCK"),      
+				("LEFTCTRL","LEFTCTRL","LEFTCTRL"),      
+				("LEFTALT","LEFTALT","LEFTALT"),      
+				("RIGHTALT","RIGHTALT","RIGHTALT"),      
+				("RIGHTCTRL","RIGHTCTRL","RIGHTCTRL"),      
+				("RIGHTSHIFT","RIGHTSHIFT","RIGHTSHIFT"),      
+				("LEFTSHIFT","LEFTSHIFT","LEFTSHIFT"),      
+				("ESC","ESC","ESC"),      
+				("TAB","TAB","TAB"),      
+				("RET","RET","RET"),      
+				("SPACE","SPACE","SPACE"),      
+				("LINEFEED","LINEFEED","LINEFEED"),      
+				("BACKSPACE","BACKSPACE","BACKSPACE"),      
+				("DEL","DEL","DEL"),      
+				("SEMICOLON","SEMICOLON","SEMICOLON"),      
+				("PERIOD","PERIOD","PERIOD"),      
+				("COMMA","COMMA","COMMA"),      
+				("QUOTE","QUOTE","QUOTE"),      
+				("ACCENTGRAVE","ACCENTGRAVE","ACCENTGRAVE"),      
+				("MINUS","MINUS","MINUS"),      
+				("SLASH","SLASH","SLASH"),      
+				("BACKSLASH","BACKSLASH","BACKSLASH"),      
+				("EQUAL","EQUAL","EQUAL"),      
+				("LEFTBRACKET","LEFTBRACKET","LEFTBRACKET"),      
+				("RIGHTBRACKET","RIGHTBRACKET","RIGHTBRACKET"),      
+				("LEFTARROW","LEFTARROW","LEFTARROW"),      
+				("DOWNARROW","DOWNARROW","DOWNARROW"),      
+				("RIGHTARROW","RIGHTARROW","RIGHTARROW"),      
+				("UPARROW","UPARROW","UPARROW"),      
+				("PAD0","PAD0","PAD0"),      
+				("PAD1","PAD1","PAD1"),      
+				("PAD2","PAD2","PAD2"),      
+				("PAD3","PAD3","PAD3"),      
+				("PAD4","PAD4","PAD4"),      
+				("PAD5","PAD5","PAD5"),      
+				("PAD6","PAD6","PAD6"),      
+				("PAD7","PAD7","PAD7"),      
+				("PAD8","PAD8","PAD8"),      
+				("PAD9","PAD9","PAD9"),      
+				("PADEQUALS","PADEQUALS","PADEQUALS"),      
+				("PADPERIOD","PADPERIOD","PADPERIOD"),      
+				("PADSLASH","PADSLASH","PADSLASH"),      
+				("PADASTER","PADASTER","PADASTER"),      
+				("PADMINUS","PADMINUS","PADMINUS"),      
+				("PADENTER","PADENTER","PADENTER"),      
+				("PADPLUS","PADPLUS","PADPLUS"),      
+				("F1","F1","F1"),      
+				("F2","F2","F2"),      
+				("F3","F3","F3"),      
+				("F4","F4","F4"),      
+				("F5","F5","F5"),      
+				("F6","F6","F6"),      				
+				("F7","F7","F7"),      
+				("F8","F8","F8"),      
+				("F9","F9","F9"),      
+				("F10","F10","F10"),      
+				("F11","F11","F11"),      
+				("F12","F12","F12"),      
+				("PAUSE","PAUSE","PAUSE"),      
+				("INSERT","INSERT","INSERT"),      
+				("HOME","HOME","HOME"),      
+				("PAGEUP","PAGEUP","PAGEUP"),      
+				("PAGEDOWN","PAGEDOWN","PAGEDOWN"),      
+				("END","END","END"),      
+				("UNKNOWN","UNKNOWN","UNKNOWN"),      
+				("COMMAND","COMMAND","COMMAND"),      
+				("GRLESS","GRLESS","GRLESS"),      
+				("MAX","MAX","MAX")
+			}; 
+			Delay : number=float;
+		}                 
+		           
+		input { 
+			UPDATE:bool; 
+		}
+		output {          
+			IS_DOWN:bool; 
+			NOT_DOWN:bool;
+			PRESSED:bool;
+			RELEASED:bool;  
+		}
+	}          
+
+	Node MouseButton[cat="input" label="MouseButton" description="Check mouse button!"] {
+		props {
+			Button:enum {
+				("left","left","left"),				
+				("right","right","right"),				
+				("middle","middle","middle")				
+			};
+			Delay : number=float;
+		}
+		
+		input {
+			UPDATE:bool;
+		}
+		output {
+			IS_DOWN:bool;
+			NOT_DOWN:bool;
+			PRESSED:bool;
+			RELEASED:bool;
+		}
+	}          
+
+	
+	
+
+	
+ 
+	
+	Node DeltaNode [cat="manipulation"] {
+		props {
+			TYPE : enum{ 
+				("translation","translation","translation"), 
+				("rotation","rotation","rotation"), 
+				("scale","scale","scale")
+			};
+			
+			DAMPING : number=float value="0.1";  
+		}
+		input {
+			ENABLED : bool;
+			FOLLOW_OBJ : string;
+			TARGET_OBJ : string; 
+		}
+	}  
+	
+	
+	Node TypeColor[cat="types" label="Color"]{
+		input {
+			R : float;
+			G : float;
+			B : float;
+			A : float;
+		}
+		
+		output {
+			COLOR : color;
+		}
+	}
+	
+	Node TypeInt [cat="types" label="Integer" description="Variable Node"] {
+		input {  
+			VAL : int;			  
+		}  
+		output { 
+			VAL : int; 
+		}
+	} 	 
+	
+	Node TypeFloat [cat="types" label="Float" description="Variable Node"] {
+		input {  
+			VAL : float;			  
+		}  
+		output { 
+			VAL : float; 
+		}
+	} 	 
+	
+	Node TypeBool [cat="types" label="Bool" description="Variable Node"] {
+		input {
+			VAL : bool;			
+		} 
+		output {
+			VAL : bool;
+		} 
+	} 		
+	 
+	Node PBSMaterial[cat="pbs"] {
+		input { 
+			ENABLED : bool; 
+			ALBEDO_COL : color = "(1,1,1,1)";
+			F0_COL : color="(0.01,0.01,0.01,1)";
+			ROUGH : float;  
+			LR_OFFSET : float;       
+		}          
+		
+		output { 
+			SLOT_MAIN : bool validNode{PBSSlot} maxCons=1; 
+			SLOT_D1 : bool validNode{PBSSlot} maxCons=1;
+			SLOT_D2 : bool validNode{PBSSlot} maxCons=1;
+			
+			ENV_MAP : bool validNode{PBSTex_Env} maxCons=1;
+		}          
+	} 
+	  
+	
+	Node PBSSlot[cat="pbs"] { 
+		input{
+			PBS_MAT :	bool visibility=DATA_HIDDEN 
+						validNode {PBSMaterial}	[connectionRequired];
+			UV_MAP : int;
+			OFFSET_X : float="0";
+			OFFSET_Y : float="0";
+			SCALE_X : float="1";
+			SCALE_Y : float="1";
+		}
+		
+		output {
+			ALBEDO_MAP : bool validNode{PBSTex_Albedo} maxCons=1;
+			NORMAL_MAP : bool validNode{PBSTex_Normal} maxCons=1;
+			F0_MAP     : bool validNode{PBSTex_F0} maxCons=1 ;
+		}  
+	}
+	 
+	Node PBSTex_Albedo [cat="pbs"]{
+		props {
+			ALBEDO_MAP : string = "" type = images [updateable];
+			PATH : string = "" show=inSideBar;
+			   
+			BLEND_FUNC : enum{
+				("ALPHA","ALPHA","ALPHA"),
+				("ALPHA_PREMUL","ALPHA_PREMUL","ALPHA_PREMUL"),
+				("ADD","ADD","ADD"),
+				("SUBTRACT","SUBTRACT","SUBTRACT"),
+				("MULTIPLY","MULTIPLY","MULTIPLY"),
+				("MULTIPLY_2X","MULTIPLY_2X","MULTIPLY_2X"),
+				("SCREEN","SCREEN","SCREEN"),
+				("OVERLAY","OVERLAY","OVERLAY"),
+				("LIGHTEN","LIGHTEN","LIGHTEN"),
+				("DARKEN","DARKEN","DARKEN"),
+				("GRAIN_EXTRACT","GRAIN_EXTRACT","GRAIN_EXTRACT"),
+				("GRAIN_MERGE","GRAIN_MERGE","GRAIN_MERGE"),
+				("DIFFERENCE","DIFFERENCE","DIFFERENCE")  
+			};
+		}
+		 
+		input { 
+			SLOT : bool visibility=DATA_HIDDEN validNode {PBSSlot}	[connectionRequired];
+			BLEND_FAC : float="1";
+		}
+	}
+
+	Node PBSTex_Env [cat="pbs"]{
+		props {
+			ENV_MAP : string = "" type = images[updateable];
+			PATH : string = "" show=inSideBar;
+		} 	
+		 
+		input { 
+			SLOT : bool visibility=DATA_HIDDEN validNode {PBSMaterial}	[connectionRequired];
+			INTENSITY_FAC : float="1";
+		}
+	}
+
+
+	Node PBSTex_Normal [cat="pbs"]{
+		props {
+			NORMAL_MAP : string = "" type = images [updateable];
+			PATH : string = "" show=inSideBar;
+		}
+		
+		input {  
+			SLOT : bool visibility=DATA_HIDDEN validNode {PBSSlot}	[connectionRequired];
+			NORMAL_BLEND : float="1";
+			R_BLEND : float="1";
+		}
+	}
+	  
+	
+		Node PBSTex_F0 [cat="pbs"]{
+		props {
+			F0_MAP : string = "" type = images[updateable];
+			PATH : string = "" show=inSideBar;
+			BLEND_FUNC : enum{
+				("ALPHA","ALPHA","ALPHA"),
+				("ALPHA_PREMUL","ALPHA_PREMUL","ALPHA_PREMUL"),
+				("ADD","ADD","ADD"),
+				("SUBTRACT","SUBTRACT","SUBTRACT"),
+				("MULTIPLY","MULTIPLY","MULTIPLY"),
+				("MULTIPLY_2X","MULTIPLY_2X","MULTIPLY_2X"),
+				("SCREEN","SCREEN","SCREEN"),
+				("OVERLAY","OVERLAY","OVERLAY"),
+				("LIGHTEN","LIGHTEN","LIGHTEN"),
+				("DARKEN","DARKEN","DARKEN"),
+				("GRAIN_EXTRACT","GRAIN_EXTRACT","GRAIN_EXTRACT"),
+				("GRAIN_MERGE","GRAIN_MERGE","GRAIN_MERGE"),
+				("DIFFERENCE","DIFFERENCE","DIFFERENCE")
+			};
+		}
+		
+		input { 
+			SLOT : bool visibility=DATA_HIDDEN validNode {PBSSlot}	[connectionRequired];
+			BLEND_FAC : float="1";
+		}
+		 
+	}
+	 
+	
+	Node EngineNode [cat="engine"]{
+		input {
+			SHUTDOWN : bool = "0";
+			DEBUG_SERVER : bool = "0";
+			SHOW_CONSOLE : bool = "0";
+			SHOW_ONSCREENTEXT : bool = "1";
+		}  
+	} 
+	
+	
+	Node IfNode[cat="math" label="If node" description="If-Condition"] {
+		props {
+			FUNC : enum { 
+				("EQ","==","equals"),
+				("GT",">","greater than"),
+				("GE",">=","greater equals"),
+				("LT","<","less than"),
+				("LE","<=","less equals"),
+				("NOT","!=","not equals")
+				
+			};
+		}
+		
+		input {
+			a : string;
+			b : string;
+		}
+		
+		output {
+			true : bool; 
+			false : bool;
+		}  
+	} 
+	
+	
+	Node SoundNode[cat="scene" label="Sound Node" description="Select Sound"] {
+		props {
+			FILEP : string = "" type=filepath;
+		}
+		
+		input {
+			ENABLED : bool;
+		} 
+		
+		output {
+			sound: string;
+		}
+	}	
+
+
+	Node JoystickNode[cat="input"] {
+		props {
+			deathZoneMin : number=int value="-1000";
+			deathZoneMax : number=int value="1000";
+		}	
+		
+		input {
+			UPDATE : bool;
+			joystickNr : int;
+		}
+		
+		output {
+			IS_ACTIVE : bool;
+			AXIS1 : float;
+			AXIS2 : float;
+			AXIS1_REL : float;
+			AXIS2_REL : float;
+			AXIS3 : float;
+			AXIS4 : float;
+			AXIS3_REL : float;
+			AXIS4_REL : float;
+			LEFT : bool;
+			RIGHT : bool;
+			UP : bool;
+			DOWN : bool;
+		}
+	}
+	
+	Node JoystickButton[cat="input"] {
+		props {
+			buttonNr:number=int value="0";
+		} 
+		 
+		input {
+			UPDATE : bool;
+			joystickNr : int;
+		}
+		
+		output {
+			IS_DOWN : bool;
+			IS_NOT_DOWN : bool;
+			IS_PRESSED : bool;
+			IS_RELEASED : bool;
+		}
+	}
+
+	Node VehicleNode[cat="physics"] {
+		props {
+			Type : enum { ("ALLWHEEL","ALLWHEEL","ALLWHEEL")
+						 ,("PROPULSION","PROPULSION","PROPULSION")
+						 ,("TRACTION","TRACTION","TRACTION")
+			};
+			
+			EngineTorque : number=float value="330.0"; 
+			BreakPower : number=float value="30.0" precision=2;
+			RearBreakRatio : number=float value="0.6" precision=2;
+			MaxSteeringAngle : number=float value="0.23" precision=2;
+			RuptorRpm : number=float value="6000.0";
+		}
+		
+		input {
+			UPDATE : bool;
+			FRONT : bool;
+			REAR : bool;
+			LEFT : bool;
+			RIGHT : bool;
+			STEER_TIME : float;
+			STEER_VALUE : float; 
+			HAND_BRAKE : bool;
+			GEAR_UP : bool;
+			GEAR_DOWN : bool;
+			GEARBOX : bool;
+		}
+		
+		output {
+			WHEELS : bool validNode{VehicleWheel} [connectionRequired];
+			ZROT : float;
+			KMH : int;
+			GEAR : int;
+			RPM : int;
+		}
+	} 
+	
+	Node VehicleGearbox[cat="physics"] {
+		props {
+			automatic : number=bool;
+			shiftTime : number=float value="0.21" precision=2;
+			reverseRatio : number=float value="-11.83" precision=2;
+		}
+		
+		output {
+			VEHICLE : bool;
+			GEARS : bool;
+		}
+	}
+	
+	Node VehicleGear[cat="physics"] {
+		props {
+			gearNr : number=int value="1";
+			ratio : number=float value="9.31" precision=2;
+			rpmLow : number=float value="2000.0";
+			rpmHigh : number=float value="3000.0";
+		}
+		
+		input {
+			GEARBOX : bool;
+		}
+	}
+	
+	Node VehicleWheel[cat="physics"] {
+		props {
+			wheelObject : string="" type=objects descr="The Wheel-Gameobject";
+			isFront : number=bool descr="is this wheel front(steering)-wheel?";
+			suspensionTravelCm: number=float value="40.0" ;
+			suspensionRestLength : number=float value="0.4" precision=2 descr="The current length of the suspension (metres)";
+			suspensionStiffness : number=float value="22.0" precision=2;
+			friction : number=float value="2.0" precision=2;
+			rollInfluence : number=float value="0.1" precision=2;
+			axis : number=floatvec[3] value="(0.0,0.0,0.0)" precision=2;			
+		}
+		
+		input {
+			VEHICLE : object;
+		}
+	}
+	
+	
+	Node CameraNode[cat="scene" label="Camera Node" description="Select Camera"] {
+		props {
+			CAMERA_OBJ : string = "" type=cameras icon="OUTLINER_DATA_CAMERA";
+		}
+		
+		input {
+			UPDATE :bool;
+			CENTER_OBJ : object;
+			CENTER_POSITION : vector;
+			REL_X : float = "0";
+			REL_Y : float = "0";
+			REL_Z : float = "0";
+			TARGET : object;
+			INITIAL_PITCH : float = "45.0";
+			MIN_PITCH : float;
+			MAX_PITCH : float="80.0";
+			INITIAL_ROLL : float="0";
+			MIN_ROLL:float="-180";
+			MAX_ROLL:float="180";
+			KEEP_DISTANCE : bool="1";
+			MIN_Z:float="0";
+			MAX_Z:float="10000";
+			AVOID_BLOCKING : bool="0";
+			BLOCKING_RADIUS : float="0.3";
+			STIFNESS : float="0.8";
+			DAMPING : float="0.3";
+		}
+		
+		output {
+			CURRENT_ROLL : vector;
+			CURRENT_PITCH : vector;
+		}
+	}	
+/*
+
+
+	Node GroupNode[cat="scene" label="Group Node" description="Select Groups"] {
+		props {
+			obj : string type=groups icon="GROUP";
+		}
+		
+		output {
+			obj: string 
+		}
+	}
+
+	
+	Node SceneNode[cat="scene" label="Scene Node" description="Select Scene"] {
+		props {
+			scene : string type=scenes icon="SCENE_DATA";
+		}
+		
+		output {
+			scene: string
+		}
+	}
+
+
+	Node MaterialNode[cat="scene" label="Material Node" description="Select Material"] {
+		props {
+			material : string type=materials icon="MATERIAL_DATA";
+		}
+		
+		output {
+			material: string
+		}
+	}
+	Node FontNode[cat="scene" label="Font Node" description="Select Font"] {
+		props {
+			material : string type=fonts;
+		}
+		
+		output {
+			material: string
+		} 
+	}
+	Node TextNode[cat="scene" label="Text Node" description="Select Text"] {
+		props {
+			text : string type=texts icon="TEXT";
+		}
+		
+		output {
+			material: string
+		}
+	}
+	Node MeshNode[cat="scene" label="Mesh Node" description="Select Meshes"] {
+		props {
+			mesh : string type=meshes icon="MESH_DATA";
+		}
+		
+		output {
+			scene: string
+		}
+	}
+	Node ScriptNode[cat="scene" label="Script Node" description="Select Scripts"] {
+		props {
+			script : string type=scripts icon="FILE_SCRIPT";
+		}
+		
+		output {
+			script: string
+		}
+	}
+	Node TextureNode[cat="scene" label="Texture Node" description="Select Textures"] {
+		props {
+			script : string type=textures icon="FILE_IMAGE";
+		} 
+		
+		output {
+			script: string
+		}
+	}
+	Node LampNode[cat="scene" label="Lamp Node" description="Select Lamps"] {
+		props {
+			script : string type=lamps icon="OUTLINER_DATA_LAMP";
+		}
+		
+		output {
+			script: string
+		}
+	}
+
+
+
+		    
+	Node CollisionNode[cat="physics" label="Collision Node" description="Check for collision"] {
+		input { 
+			enabled:bool
+			target:string
+			collides_with:string
+		}
+		
+		output {
+			collided:bool
+			not_collided:bool
+			collided_obj:string
+			contact_position:vector	
+		}
+	}	    
+		              
+/* 	Node TestNode[cat="TOM" label="TestLabel" description="DecrTestNode" icon="SOUND"] {
+		props { 
+			filep : string = "DEFAULT" type=filepath maxlen=4;
+			text : string = "text" type=none maxlen=6;
+			dirp : string = "" type=dirpath maxlen=6;
+			passw : string = "a" type=password maxlen=6;
+			bstr : string = "bstr" type=bytestring maxlen=6;
+			            
+			             
+			fTest : number=floatvec : layer;		            
+			            
+			fNone : number=int:none value= "95"  unit=acceleration precision=1 step="10" hbounds(min="0" max="60");
+			anlge : number=int value = "2"  unit=rotation precision=1 step="10" sbounds(min="0" max="95");
+			dist : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+			fac : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+			oerc : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+			pix  : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+			timn : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+			usign : number=float value = "0.1"  unit=none precision=1 step="10" sbounds(min="0" max="60");
+		
+			mType : enum { ("add","ADD","Addition"),("sub","SUB","subtraction") } default="add" descr="Math Node";
+		}           
+  		                          
+		input {   
+			intensitiy : Float ="0.5"
+			color : Color = ('1.0','1.0','1.0','1.0')
+		}   
+ 		                      
+		output {   
+			position: Vector 
+			color: Color
+		} 
+	} */
+}  

@@ -1,0 +1,34 @@
+1) Install/update emscripten. ( https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html )
+
+-download: https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz
+
+./emsdk update
+./emsdk install latest
+./emsdk activate latest
+source ./emsdk_env.sh
+
+
+2) cmake-gui => use the toolchain from $EMSCRIPTEN/emscripten/[brance]/CMake/Packages/Platform
+
+To know:
+a) you can set create html and virtualfolder. then this folder will be packaged for you and automatically loader by the generated html-file
+(the file will be in [build]/Samples/EmscriptenDemo/Shared )
+b) atm(20161208): in order to work with pthreads you have to set -s USE_PTHREADS=1 to cxx-flags and c-flags
+c) atm(20161208): when using pthreads you cannot use automatic growth, so you need to set a limit for the space that needs to be reserved. To do this
+                  use -s TOTAL_MEMORY=1536870912 (in bytes) here 1.5gb
+
+d) atm(20161208): you need to use firefox-nightly to have pthreads-support. (Time is on our side)
+                  
+e) You can package the data-files without needing to compile. for this use $EMSCRIPTEN/tools/file_packager.py like this:
+python $EMSCRIPTEN/tools/file_packager.py ../runtimes/web/project.data --js-output=../runtimes/web/loader.js --preload .
+
+- file_packager will pack relative to the folder you are calling. So in order to work properly you should go in the folder to pack and use --preload .
+
+--js-output tells where to place the js-file that is actually loading the data-file in this case ( ../runtimes/web/project.data )
+
+
+atm(20161208): From time to time I get those:
+ERROR:root:Emscripten, llvm and clang repo versions do not match, this is dangerous (1.36.0, 1.36.14, 1.36.14)
+ERROR:root:Make sure to use the same branch in each repo, and to be up-to-date on each. See http://kripken.github.io/emscripten-site/docs/building_from_source/LLVM-Backend.html
+
+Not sure why because I activated emsdk the right way. Just start 'make' again and it works. At least atm.

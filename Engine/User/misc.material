@@ -1,0 +1,11 @@
+material gkDebugger_Material
+{
+technique
+   {
+      pass
+      {
+         lighting off
+         diffuse vertexcolour
+      }
+   }
+}

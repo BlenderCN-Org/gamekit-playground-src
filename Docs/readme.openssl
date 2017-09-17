@@ -1,0 +1,46 @@
+--------------------------
+Build OpenSSL for Android
+--------------------------
+
+1) Copy android-gcc helper-script to /usr/local/bin (if not already done)
+sudo cp $GAMEKIT/Tools/Misc/android/agcc* /usr/local/bin
+1b)Make the files executable:
+sudo chmod +x /usr/local/bin/agcc*
+
+2) Create Standalone-Toolchain (change the --arch-option as wanted arm,x86,mips
+sudo $NDK/build/tools/make-standalone-toolchain.sh --arch=arm --ndk-dir=$NDK --install-dir=/opt/ndk-x86-9 --platform=android-9
+2b) Make symlink in home-path(the script use hardcoded paths, so for now we accept that! By the way, the script rules!)
+ln -s /opt/ndk-x86-9 android-toolchain
+
+3) Download OpenSSL: http://www.openssl.org/source/ e.g. ( http://www.openssl.org/source/openssl-1.0.1e.tar.gz )
+3b) unpack the file:
+    tar xvg openssl.tar.gz
+
+4) Rewire-Path: (use the bin-folder without target-prefix)
+export PATH=/home/ttrocha/android-toolchain/arm-linux-androideabi/bin:$PATH
+
+4b) Create an Android-Library-Repo: e.g. in ~/android-repo
+mkdir ~/android-repo
+mkdir ~/android-repo/arm
+mkdir ~/android-repo/arm7a
+mkdir ~/android-repo/x86
+
+
+5) Configure openssl for android:
+CC=agcc ./Configure [android|android-armv7|android-x86] --prefix=/home/ttrocha/android-repo/arm
+
+6) compile and install (to ./install)
+make
+make install
+
+That's it
+
+This one can be used for compiling libcurl
+
+Links:
+Cryptonite: http://code.google.com/p/cryptonite/wiki/BuildInstructions#Toolchain_setup
+Toolchain agcc: http://android-tricks.blogspot.de/2009/02/hello-world-c-program-on-using-android.html
+original script: http://plausible.org/andy/agcc
+OpenSSL: http://www.openssl.org/source/
+
+  

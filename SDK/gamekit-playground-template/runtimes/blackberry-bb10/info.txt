@@ -1,0 +1,4 @@
+this is arm compilation. never tried on device
+
+Info:
+20161208: x86-emulation crashing on emulator: (NOT WORKING) crash after ogre read the gl extensions

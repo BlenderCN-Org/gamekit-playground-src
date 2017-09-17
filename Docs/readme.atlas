@@ -1,0 +1,16 @@
+Put all images and fonts in one folder:
+Then call:
+java -jar $GAMEKIT/Tools/executables/java/gorillaConverter.jar [img-folder] [dest-folder] [gorilla-out-name]
+
+
+Create Fonts and place them in the Image-Folder (with the corresponding .xml/.fnt-file:
+Option1)
+ Tool: $GAMEKIT/Tools/executables/createFont.sh [outdir] [fontname]
+
+Option2)
+ Tool: $GAMEKIT/Tools/executables/win32/bmfont/bmfont.exe
+ Remark: use 32bit colors, use xml-output
+ 
+ 
+ 
+ 

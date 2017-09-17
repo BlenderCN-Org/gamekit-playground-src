@@ -1,0 +1,103 @@
+Blackberry-Doc
+
+CAUTION:
+-NEW Libs: Since there seems to be a problem with cmake(?) that adds -rdynamic as gcc flag which results to an error you 
+		   will have to get the last link-command (VERBOSE=1 make) and copy it to the _build.sh file. Once I get rid of the -rdynamic issue, that won't be necessary anymore
+		   
+-Assets  : Assets(including whole folders) can be added via bar-descriptor.xml (..<asset path="res.cfg">res.cfg</asset>..) and are accessable via app/native/..
+-Ogre-Resources: Do not forget to add all necessary resource-paths to res.cfg		    
+
+Precompiled on device          : libcurl,libopenal, openssl(libcrypto,libssl)
+
+-----------------------.
+----- SETUP BB10-------
+-----------------------
+1) set the env-variables with:
+source /home/ttrocha/_dev/_libs/blackberry/bb10/bbndk-env.sh 
+
+
+2) create cmake-project:
+NOTICE: There will be a cmake-problem(CMakeTryRun), just go to compile!
+a)cmake(simulator):
+cmake $GAMEKIT -DCMAKE_TOOLCHAIN_FILE=$GAMEKIT/CMake/toolchain/bb10.toolchain.cmake -DTargetPlatform="BlackBerry" -DOGREKIT_BUILD_BLACKBERRY=1 -DARCH=x86 -G "Eclipse CDT4 - Unix Makefiles"
+
+b)cmake(device):
+cmake $GAMEKIT -DCMAKE_TOOLCHAIN_FILE=$GAMEKIT/CMake/toolchain/bb10.toolchain.cmake -DTargetPlatform="BlackBerry" -DOGREKIT_BUILD_BLACKBERRY=1 -DARCH=arm -G "Eclipse CDT4 - Unix Makefiles"
+
+---------------------------
+
+------------------------------
+---- SETUP PLAYBOOK ----------
+------------------------------
+@TOCHECK:
+1) set the env-variables with:
+source _dev/_libs/blackberry/bbndk2.1/bbndk-env.sh
+
+2)create cmake
+a) cmake(simulator):
+cmake $GAMEKIT -DCMAKE_TOOLCHAIN_FILE=$GAMEKIT/CMake/toolchain/playbook.toolchain.cmake -DTargetPlatform="BlackBerry" -DOGREKIT_BUILD_BLACKBERRY=1 -DARCH=x86 -G "Eclipse CDT4 - Unix Makefiles"
+
+b)cmake(device):
+cmake $GAMEKIT ~/_dev/extprojects/gamekit-dev -DCMAKE_TOOLCHAIN_FILE=$GAMEKIT/CMake/toolchain/playbook.toolchain.cmake -DTargetPlatform="BlackBerry" -DOGREKIT_BUILD_BLACKBERRY=1 -DARCH=arm -G "Eclipse CDT4 - Unix Makefiles"
+
+
+--------------------------------
+---- COMPILE BOTH --------------
+--------------------------------
+
+2)  Fix issue / copy bb-specific files
+    There will be a problem due to cross-compilation. CMake needs some manual value for tests that could not run
+    Just copy bb-specific files in the build-folder. That will fix that as well (TODO: automate this)
+    
+    cp $GAMEKIT/SDK/Blackberry/* .    
+
+Compile:
+3) make -j2
+ 
+4) PLAYBOOK-MANUALLY1) wait for compilation to crash at the very end. This is due to -rdynamic set by cmake which causes
+   the problem. There is a hack to get the last link-call by calling:
+   
+   VERBOSE=1 make
+   
+   This is only necessary if you added a new library or such. Copy the whole link-call to _build.sh (in GAMEKIT/SDK/Blackberry )
+   
+   Otherwise just use:
+   
+   ./_build.sh [IP-TO-DEVICE] [PASSWORD]
+
+
+----------------------------------------
+OPTIONAL: Manual Install
+----------------------------------------
+cd to build-root
+
+deploy:
+cp [gamekit]/SDK/Blackberry/bar-descriptor.xml .
+cp [gamekit]/SDK/Blackberry/icon.png .
+
+Pack:
+blackberry-nativepackager -package gk.bar -devMode bar-descriptor.xml
+Upload:
+blackberry-nativepackager -installApp -device [IP] -password .... gk.bar 
+
+
+------------------------------------------
+Simulator:
+------------------------------------------
+1) you need vmware-player
+2) download the vmware-images
+[Couldn't get bb10 to run! there were some opengl-errors when parsing the extension?!]
+
+HINTS:
+-make sure developmentmode is on on device
+-make sure debug-token is on device and the author is filled in correctly in bar-descriptor.xml
+(go to the IDE and do on a sample project to get the data)
+
+Links:
+Configure Environment:
+https://developer.blackberry.com/native/documentation/bb10/com.qnx.doc.native_sdk.quickstart/topic/configure_environment.html
+Debug-Tokens:
+https://developer.blackberry.com/native/documentation/bb10/com.qnx.doc.native_sdk.devguide/com.qnx.doc.native_sdk.devguide/topic/t_setup_manual_create_debug_token_cmdline.html
+
+
+

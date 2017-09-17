@@ -1,0 +1,79 @@
+CAUTION: Following Folders are added my us (they contain generated config-headers)
+Dependencies/libcurl/android
+Dependencies/libcurl/blackberry (not need anymore. curl is on the device)
+
+
+if there is an error like TIMEVAL reconstructed go to BUILD/Dependencies/Source/libcurl/lib/curl_config.h 
+and set #define HAVE_STRUCT_TIMEVAL 1 (not sure if that happend only because of me fingring with the gcc)
+
+--------------------------
+Experimental Cmake with code:
+-----------------------------
+
+Let cmake configure and generate. There will be an error because some results are not available due 
+to cross-compilation. Cmake creates a file and tell you to fill out the results manually.
+
+I got some how there much problems and had still to fill in stuff manually some #define ERROR (POSIX or ...)
+
+works good if not cross-compiling (at least on linux)
+
+
+For cross-compilation we make precompiled packagages until we find a sollution for the cmake-problems
+
+
+-------------------------
+Predefined for Cross-Compilation:
+
+curl is compiled as is on desktop but is used precompiled on android. blackberry has already openssl/curl on the device
+
+---------------------------------------------------------------------------------------------------
+
+
+
+------------
+ANDROID: 
+------------
+To say it from the beginning, if someone != me(dertom) will ever read this, it was hard stuff to find a good solution
+to compile this with openssl. no kidding. Took me about 2days full of hardaches and mind-blow-whatevers... :D But it
+is very simple (AND the library ordering matters!! :D Of course) I hope that I will transform this to a source-dependency
+for android quite soon (now that I have openssl compiled in a good manner) Btw, it was openssl that funked me, not libcurl
+which has cool scripts...
+
+1) Build openssl (see Docs/readme.openssl)
+
+2) Download libcurl ( http://curl.haxx.se/download.html ) e.g. 
+wget http://curl.haxx.se/download/curl-7.30.0.tar.gz
+
+3) Add toolchain to path (this time WITH prefix)
+export PATH=/home/ttrocha/android-toolchain/bin:$PATH
+
+4) configure curl and set install to our repository
+arm:
+./configure --with-ssl=/home/ttrocha/android-repo/armv7 --host=arm-linux-androideabi --prefix=/home/ttrocha/android-repo/armv7
+armv7a:
+CFLAGS="-march=armv7-a -mfloat-abi=softfp -mfpu=vfp" ./configure --with-ssl=/home/ttrocha/android-repo/armv7 --host=arm-linux-androideabi --prefix=/home/ttrocha/android-repo/armv7
+x86:
+use another toolchain
+
+5)
+make 
+make install
+
+6) go to the repository and copy the library
+cd ~/android-repo/armv7/lib
+cp libcurl.a GAMEKIT/Dependencies/android/libcurl/arm
+
+6b) copy the include (first remove an old include if there) 
+cd ~/android-repo/armv7/include
+CAUTION: rm -Rf GAMEKIT/Dependencies/android/include/curl
+cp -R curl GAMEKIT/Dependencies/android/include
+
+notice: first I hope to replace the prelinked-dependency and 2nd not sure about the include-handling once I start complining for x86-android as well
+
+
+Links:
+http://curl.haxx.se/download.html
+http://curl.haxx.se/docs/install.html
+android-ports: http://dan.drown.org/android/ (I think I could have use one of these libs but I struggled over a wrong link library-placement *hust*)
+
+ 

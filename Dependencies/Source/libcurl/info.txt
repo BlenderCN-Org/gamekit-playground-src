@@ -1,0 +1,6 @@
+Version 7.29.0
+http://curl.haxx.se/download/curl-7.29.0.tar.gz
+
+For android info see: Docs/readme.libcurl
+
+config-folder is custom by us

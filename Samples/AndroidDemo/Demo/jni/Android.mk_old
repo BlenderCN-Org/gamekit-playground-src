@@ -1,0 +1,243 @@
+ANDROID_STARTER_PATH := $(call my-dir)/../../Shared
+LIB_PATH := $(call my-dir)/../../../../libs/armeabi-v7a
+OGRE_PATH := /home/ttrocha/_dev/extprojects/_build/gamekit-android/Bin/lib
+OPENAL_PATH := /home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/android/openal/armeabi-v7a
+LIBCURL_PATH := /home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/android/libcurl-7.29.0
+
+LOCAL_PATH := $(ANDROID_STARTER_PATH)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := ogrekit
+#LOCAL_SRC_FILES := AndroidLogListener.cpp Main.cpp
+LOCAL_SRC_FILES := gkAndroidGame.cpp OgreActivityJNI.cpp 
+
+LOCAL_C_INCLUDES := /home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/OgreMain/include
+LOCAL_C_INCLUDES += /home/ttrocha/_dev/extprojects/gamekit-dev/Engine
+
+LOCAL_LDLIBS    :=  -llog -lGLESv2 -lEGL -landroid -lz 
+#-lstdc++ -lsupc++
+LOCAL_CFLAGS    := -D__ANDROID__ -Wno-psabi  
+
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/_build/gamekit-android/Engine -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/OgreMain/include 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/Components/Overlay/include -I/home/ttrocha/_dev/extprojects/_build/gamekit-android/include 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/OgreMain/include/GLX -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/Components/RTShaderSystem/include 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Engine/AI -I/home/ttrocha/_dev/extprojects/gamekit-dev/GUI -I/home/ttrocha/_dev/extprojects/gamekit-dev/bullet/src 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/FreeType/include -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/FreeImage/ZLib 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/OIS/include -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/GameKit/Utils 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/GameKit/AnimKit -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/CppTweener/include 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/GUI3D/Gorilla -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/GUI3D/src 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Tools/FileTools/File -I/home/ttrocha/_dev/extprojects/gamekit-dev/Tools/FileTools/FileFormats/Blend 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/libRocket/Include -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/libRocket/Source 
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/Lua/lua -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/ZZipLib
+# new
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/RenderSystems/GLES2/include -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/RenderSystems/GLES2/include/EGL
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Ogre-1.9a/PlugIns/ParticleFX/include -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/OpenAL
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/glsl-optimiser/src/glsl
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Dependencies/Source/thrift/src
+LOCAL_CFLAGS    += -I/home/ttrocha/_dev/extprojects/gamekit-dev/Addons/AddonThrift
+
+LOCAL_STATIC_LIBRARIES := OgreKitCore OgreMainStatic OgreOverlayStatic OIS FreeImage freetype GameKitUtils ZLib AnimKit cpptweener 
+LOCAL_STATIC_LIBRARIES += GUI3D ZZipLib fbtFile bfBlend OgreRTShaderSystemStatic Lua  BulletDynamics BulletCollision LinearMath 
+LOCAL_STATIC_LIBRARIES += Plugin_ParticleFXStatic RenderSystem_GLES2Static OgreMainStatic RocketControls_d RocketDebugger_d libRocketCore_d 
+LOCAL_STATIC_LIBRARIES += cpufeatures android_native_app_glue OggVorbis glsloptimizer glcpp mesa libcurl addonThrift thrift
+
+LOCAL_SHARED_LIBRARIES := openal
+
+include $(BUILD_SHARED_LIBRARY)
+
+$(call import-module,android/cpufeatures)
+$(call import-module,android/native_app_glue)
+
+# gameplay
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OgreKitCore 
+LOCAL_SRC_FILES := libOgreKitCore.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OGRE_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OgreMainStatic 
+LOCAL_SRC_FILES := libOgreMainStatic.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OGRE_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OgreOverlayStatic 
+LOCAL_SRC_FILES := libOgreOverlayStatic.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := FreeImage 
+LOCAL_SRC_FILES := libFreeImage.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := freetype 
+LOCAL_SRC_FILES := libfreetype.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OIS 
+LOCAL_SRC_FILES := libOIS.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := GameKitUtils 
+LOCAL_SRC_FILES := libGameKitUtils.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := ZLib 
+LOCAL_SRC_FILES := libZLib.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := AnimKit 
+LOCAL_SRC_FILES := libAnimKit.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := cpptweener 
+LOCAL_SRC_FILES := libcpptweener.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := GUI3D 
+LOCAL_SRC_FILES := libGUI3D.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := fbtFile 
+LOCAL_SRC_FILES := libfbtFile.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := bfBlend 
+LOCAL_SRC_FILES := libbfBlend.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OGRE_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OgreRTShaderSystemStatic 
+LOCAL_SRC_FILES := libOgreRTShaderSystemStatic.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := Lua 
+LOCAL_SRC_FILES := libLua.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := ZZipLib 
+LOCAL_SRC_FILES := libZZipLib.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := BulletDynamics 
+LOCAL_SRC_FILES := libBulletDynamics.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := BulletCollision 
+LOCAL_SRC_FILES := libBulletCollision.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := LinearMath 
+LOCAL_SRC_FILES := libLinearMath.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OGRE_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := RenderSystem_GLES2Static 
+LOCAL_SRC_FILES := libRenderSystem_GLES2Static.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OGRE_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := Plugin_ParticleFXStatic 
+LOCAL_SRC_FILES := libPlugin_ParticleFXStatic.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := RocketControls_d 
+LOCAL_SRC_FILES := libRocketControls_d.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := RocketDebugger_d 
+LOCAL_SRC_FILES := libRocketDebugger_d.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := RocketCore_d 
+LOCAL_SRC_FILES := libRocketCore_d.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := OggVorbis 
+LOCAL_SRC_FILES := libOggVorbis.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := mesa 
+LOCAL_SRC_FILES := libmesa.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := glsloptimizer 
+LOCAL_SRC_FILES := libglsl_optimizer.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := glcpp 
+LOCAL_SRC_FILES := libglcpp-library.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := thrift 
+LOCAL_SRC_FILES := libthrift.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(LIB_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := addonThrift 
+LOCAL_SRC_FILES := libThriftAddon.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
+LOCAL_PATH := $(OPENAL_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := openal
+LOCAL_SRC_FILES := libopenal.so 
+include $(PREBUILT_SHARED_LIBRARY)
+
+LOCAL_PATH := $(LIBCURL_PATH)
+include $(CLEAR_VARS)
+LOCAL_MODULE    := libcurl 
+LOCAL_SRC_FILES := libcurl.a 
+include $(PREBUILT_STATIC_LIBRARY)
+
