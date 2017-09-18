@@ -36,3 +36,6 @@ cautions with ANDROID_NDK the toolchain is at least compatible with ndk-r8d and 
 5) go to you playground and build. For more instructions here (https://github.com/dertom95/gamekit-playground)
 cd ../playground
 ./package_all_linux.sh
+
+
+There are some Documentations in Docs-Folder, but they are acutally more a reminder for myself than real good understandable info. 
