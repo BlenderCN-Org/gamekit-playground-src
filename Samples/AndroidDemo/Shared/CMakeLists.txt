@@ -103,7 +103,7 @@ ADD_LIBRARY(${PROJECT_NAME}
     add_custom_command(
                         TARGET ${PROJECT_NAME}
                         POST_BUILD
-                        COMMAND ant debug
+                        COMMAND ant debug -Dndk.dir=$ENV{ANDROID_NDK}
                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../Demo
                       )
 
