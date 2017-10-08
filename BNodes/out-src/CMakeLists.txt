@@ -23,10 +23,6 @@ set(
 
 	src-nodes/NodesImpl/gkPickRayNodeImpl.cpp
 
-	src-nodes/NodesImpl/gkTomNodeImpl.h
-
-	src-nodes/NodesImpl/gkTomNodeImpl.cpp
-
 	src-nodes/NodesImpl/gkTestNodeImpl.h
 
 	src-nodes/NodesImpl/gkTestNodeImpl.cpp

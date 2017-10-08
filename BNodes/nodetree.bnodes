@@ -27,6 +27,7 @@ NodeTree Gamekit [options=generateScript]{
         }
  
 	}
+	
 	                     
 	Node TestNode[cat="temp" label="TestNode" description="This node is badass!"] {
 		props {

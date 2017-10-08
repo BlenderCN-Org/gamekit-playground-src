@@ -35,6 +35,11 @@ cd $BUILD_DIR||{
 }
 BUILD_DIR=$PWD
 
+echo "creating bnodes..."
+cd $GAMEKIT_DIR/BNodes
+./update_bnodes.sh
+echo "...finished!"
+
 echo building runtimes
 echo build-dir:$BUILD_DIR playground-dir:$PLAYGROUND_DIR
 echo gamekit-dir:$GAMEKIT_DIR
@@ -126,6 +131,7 @@ fi
 #############
 # Create-Plugin with current nodes-configuration
 #############
+echo "Recreate blenderaddon"
 
 cd $GAMEKIT_DIR/BlenderAddon
 rm BlenderAddon-Experimental.zip

@@ -1,1 +1,1 @@
-../Tools/executables/java/bnodes/bnodes.sh nodetree.bnodes ./out-src ..
+../Tools/executables/java/bnodes/bnodes.sh nodetree.bnodes ./out-src .. > bnodes.log

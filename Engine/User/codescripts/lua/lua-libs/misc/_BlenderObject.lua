@@ -92,9 +92,9 @@ function BObjectManager:constructor()
    self.groups={}
    local mmgr = Gk.MessageManager()
    local me = self
---   mmgr:addListener("internal","","__logicmanager_afterfirst",function()
---      me:processAfterInit()
---   end)
+   mmgr:addListener("internal","","__logicmanager_afterfirst",function()
+      me:processInit()
+   end)
 end
 
 function BObjectManager:add(bobj,group)
